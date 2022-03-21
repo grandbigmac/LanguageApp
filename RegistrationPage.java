@@ -104,6 +104,10 @@ public class RegistrationPage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == backButton) {
+            LoginPage r = new LoginPage();
+            frame.dispose();
+        }
     }
 
 }

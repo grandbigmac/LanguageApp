@@ -8,7 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        RegistrationPage r = new RegistrationPage();
+        //RegistrationPage r = new RegistrationPage();
+        LoginPage i = new LoginPage();
 
     }
 }
