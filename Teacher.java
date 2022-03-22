@@ -16,6 +16,7 @@ public class Teacher extends User{
     float teacherSalary;
 
     // GETTER METHODS
+
     // USER ID
     private int getUserID() {
         return userID;
@@ -57,6 +58,7 @@ public class Teacher extends User{
     }
 
     // SETTER METHODS
+
     // USER ID
     void setUserID(int i) {
         userID = i;

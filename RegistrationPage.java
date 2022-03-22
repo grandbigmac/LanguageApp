@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class RegistrationPage implements ActionListener {
 
@@ -9,7 +10,8 @@ public class RegistrationPage implements ActionListener {
     JPanel regPanel;
     JLabel label1, label2, label3, label4, label5, label6;
     JTextField nameText, emailText;
-    JPasswordField passwordText, confirmPassText;
+    JPasswordField passwordText;
+    JPasswordField confirmPassText;
     JButton backButton, submitButton;
 
     GridBagConstraints gbc = new GridBagConstraints();
@@ -29,7 +31,7 @@ public class RegistrationPage implements ActionListener {
         gbc.gridy = 0;
         regPanel.add(label6, gbc);
 
-        //Back button at top of the page, needs to direct back to the login page when pressed
+        //Back button at top of the page
         backButton = new JButton("Back");
         backButton.addActionListener(this);
         gbc.gridx = 0;
@@ -93,8 +95,8 @@ public class RegistrationPage implements ActionListener {
         regPanel.add(submitButton, gbc);
 
 
-
         frame.add(regPanel);
+        frame.getRootPane().setDefaultButton(submitButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Registration Page");
         frame.pack();
@@ -104,9 +106,53 @@ public class RegistrationPage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //When clicked, the back button reopens the first login page and closes the registration frame
         if (e.getSource() == backButton) {
             LoginPage r = new LoginPage();
             frame.dispose();
+        }
+
+        //When pressed, loginButton captures the information entered in the registration fields and creates a new user object out of that information
+        if (e.getSource() == submitButton) {
+            //Create new student object for new user
+            Student r = new Student();
+
+            //Set the student's password
+            final String password = passwordText.getText().toString();
+            final String confirmPW = confirmPassText.getText().toString();
+
+            if (password.equals(confirmPW)) {
+
+                r.setStudentPassword(password.toCharArray());
+
+                //Set student name
+                r.setStudentName(nameText.getText());
+                //Set student email
+                r.setStudentEmail(emailText.getText());
+
+                //Generate a new User ID using 6 random integers concatenated to a string then parsed back into an integer
+                //Need to add functionality where the number generated is unique to the user, and no other user can have the same userID
+                String userID = "";
+                Random rand = new Random();
+
+                for (int i = 0; i < 6; i++) {
+                    int number = rand.nextInt(10);
+                    userID = userID + number;
+                }
+
+                r.setStudentID(Integer.parseInt(userID));
+
+            }
+            else {
+                JOptionPane.showMessageDialog(frame, "Error, passwords do not match.");
+            }
+
+
+
+
+            //generate user ID
+            //get student's birthdate
+            //set user's start date to date of object generation
         }
     }
 

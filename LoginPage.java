@@ -13,7 +13,7 @@ public class LoginPage implements ActionListener {
 
     JFrame frame;
     JPanel loginPanel;
-    JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9;
+    JLabel label1, label2, label3, label4, label5, label6;
     JTextField emailText;
     JPasswordField passwordText;
     JButton loginButton;
@@ -44,8 +44,8 @@ public class LoginPage implements ActionListener {
             System.out.println("Could not find file " + "loginpageicon.jpg");
         }
 
-        //Title for Login Page
-        label2 = new JLabel("LOGIN");
+        //Title for Student Login Page
+        label2 = new JLabel("STUDENT LOGIN");
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
@@ -89,7 +89,7 @@ public class LoginPage implements ActionListener {
         loginPanel.add(loginButton, gbc);
 
         //Hypertext to change to teacher login page
-        label5 = new JLabel("Teacher login link");
+        label5 = new JLabel("Teacher login page");
         //Fix when teacher login page is completed
         label5.addMouseListener(new MouseListener() {
             @Override
@@ -156,6 +156,7 @@ public class LoginPage implements ActionListener {
         loginPanel.add(label6, gbc);
 
         frame.add(loginPanel);
+        frame.getRootPane().setDefaultButton(loginButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Login Page");
         frame.pack();

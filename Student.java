@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Date;
 
 public class Student extends User{
@@ -12,8 +13,12 @@ public class Student extends User{
     int studentID;
     String studentEmail;
     String progress;
+    String studentName;
+
+    char[] studentPassword;
 
     // GETTER METHODS
+
     // USER ID
     private int getUserID() {
         return userID;
@@ -44,7 +49,12 @@ public class Student extends User{
         return progress;
     }
 
+    // STUDENT NAME
+    private String getStudentName() { return studentName;}
+
+
     // SETTER METHODS
+
     // USER ID
     void setUserID(int i) {
         userID = i;
@@ -74,6 +84,16 @@ public class Student extends User{
     // STUDENT PROGRESS
     void setProgress(String i) {
         progress = i;
+    }
+
+    // STUDENT NAME
+    void setStudentName(String i) {
+        studentName = i;
+    }
+
+    // STUDENT PASSWORD
+    void setStudentPassword(char[] i) {
+        studentPassword = i;
     }
 
 }

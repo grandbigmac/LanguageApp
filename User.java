@@ -9,6 +9,7 @@ public abstract class User {
     Date userStartDate;
 
     // GETTER METHODS
+
     // USER ID
     private int getUserID() {
         return userID;
@@ -25,6 +26,7 @@ public abstract class User {
     }
 
     // SETTER METHODS
+
     // USER ID
     void setUserID(int i) {
         userID = i;
