@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Student extends User{
@@ -8,7 +9,7 @@ public class Student extends User{
 
     int userID;
     int userBirthday;
-    Date userStartDate;
+    LocalDate userStartDate;
 
     int studentID;
     String studentEmail;
@@ -30,7 +31,7 @@ public class Student extends User{
     }
 
     // USER START DATE
-    private Date getUserStartDate() {
+    private LocalDate getUserStartDate() {
         return userStartDate;
     }
 
@@ -67,7 +68,7 @@ public class Student extends User{
 
     // USER START DATE
     // maybe better way to do this where it's set on object creation
-    void setUserStartDate(Date i) {
+    void setUserStartDate(LocalDate i) {
         userStartDate = i;
     }
 

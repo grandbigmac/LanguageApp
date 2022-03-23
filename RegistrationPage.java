@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.Random;
 
 public class RegistrationPage implements ActionListener {
@@ -139,20 +140,15 @@ public class RegistrationPage implements ActionListener {
                     int number = rand.nextInt(10);
                     userID = userID + number;
                 }
-
                 r.setStudentID(Integer.parseInt(userID));
 
+                //Set student's start date to the date of object generation
+                LocalDate dateObject = LocalDate.now();
+                r.setUserStartDate(dateObject);
             }
             else {
                 JOptionPane.showMessageDialog(frame, "Error, passwords do not match.");
             }
-
-
-
-
-            //generate user ID
-            //get student's birthdate
-            //set user's start date to date of object generation
         }
     }
 

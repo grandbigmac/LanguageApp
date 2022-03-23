@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Date;
 
 public abstract class User {
@@ -6,7 +7,7 @@ public abstract class User {
 
     int userID;
     int userBirthday;
-    Date userStartDate;
+    LocalDate userStartDate;
 
     // GETTER METHODS
 
@@ -21,7 +22,7 @@ public abstract class User {
     }
 
     // USER START DATE
-    private Date getUserStartDate() {
+    private LocalDate getUserStartDate() {
         return userStartDate;
     }
 
@@ -39,7 +40,7 @@ public abstract class User {
 
     // USER START DATE
     // maybe better way to do this where it's set on object creation
-    void setUserStartDate(Date i) {
+    void setUserStartDate(LocalDate i) {
         userStartDate = i;
     }
 }
