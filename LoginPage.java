@@ -89,7 +89,7 @@ public class LoginPage implements ActionListener {
         loginPanel.add(loginButton, gbc);
 
         //Hypertext to change to teacher login page
-        label5 = new JLabel("Teacher login page");
+        label5 = new JLabel("Teacher Login Page");
         //Fix when teacher login page is completed
         label5.addMouseListener(new MouseListener() {
             @Override
@@ -104,18 +104,18 @@ public class LoginPage implements ActionListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                //TeacherLoginPage i = new TeacherLoginPage();
-                //frame.dispose();
+                TeacherRegistrationPage i = new TeacherRegistrationPage();
+                frame.dispose();
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                label6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                label5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                label6.setCursor(Cursor.getDefaultCursor());
+                label5.setCursor(Cursor.getDefaultCursor());
             }
         });
         gbc.gridx = 1;

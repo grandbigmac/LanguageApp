@@ -41,7 +41,7 @@ public class RegistrationPage implements ActionListener {
 
 
         //Title text for the page
-        label1 = new JLabel("REGISTER");
+        label1 = new JLabel("REGISTER AS A STUDENT");
         gbc.gridx = 1;
         gbc.gridy = 0;
         regPanel.add(label1, gbc);
