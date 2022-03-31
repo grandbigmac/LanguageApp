@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.Random;
 
-public class TeacherRegistrationPage implements ActionListener {
+public class TeacherRegistrationPage {
 
     JFrame frame;
     JPanel regPanel;
@@ -27,7 +27,12 @@ public class TeacherRegistrationPage implements ActionListener {
 
         //Back button at top of the page
         backButton = new JButton("Back");
-        backButton.addActionListener(this);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                backButton();
+            }
+        });
         gbc.gridx = 0;
         gbc.gridy = 0;
         regPanel.add(backButton, gbc);
@@ -82,7 +87,12 @@ public class TeacherRegistrationPage implements ActionListener {
 
         //Submit button, needs to be triggered when user presses enter button
         submitButton = new JButton("SUBMIT");
-        submitButton.addActionListener(this);
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
         gbc.gridx = 1;
         gbc.gridy = 5;
         regPanel.add(submitButton, gbc);
@@ -96,14 +106,9 @@ public class TeacherRegistrationPage implements ActionListener {
         frame.setVisible(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        //When clicked, the back button reopens the first login page and closes the registration frame
-        if (e.getSource() == backButton) {
-            LoginPage r = new LoginPage();
-            frame.dispose();
-        }
-
+    public void backButton() {
+        LoginPage r = new LoginPage();
+        frame.dispose();
     }
 }
+

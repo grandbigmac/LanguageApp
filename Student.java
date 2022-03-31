@@ -21,37 +21,48 @@ public class Student extends User{
     // GETTER METHODS
 
     // USER ID
-    private int getUserID() {
+    public int getUserID() {
         return userID;
     }
 
     // USER BIRTHDAY
-    private int getUserBirthday() {
+    public int getUserBirthday() {
         return userBirthday;
     }
 
     // USER START DATE
-    private LocalDate getUserStartDate() {
+    public LocalDate getUserStartDate() {
         return userStartDate;
     }
 
     // STUDENT ID
-    private int getStudentID() {
+    public int getStudentID() {
         return studentID;
     }
 
     // STUDENT EMAIL
-    private String getStudentEmail() {
+    public String getStudentEmail() {
         return studentEmail;
     }
 
     // STUDENT PROGRESS
-    private String getProgress() {
+    public String getProgress() {
         return progress;
     }
 
     // STUDENT NAME
-    private String getStudentName() { return studentName;}
+    public String getStudentName() { return studentName;}
+
+    // STUDENT PASSWORD
+    public String getStudentPassword() {
+        String pw = "";
+
+        for (int i = 0; i < studentPassword.length; i++){
+            pw = pw + studentPassword[i];
+        }
+
+        return pw;
+    }
 
 
     // SETTER METHODS

@@ -2,10 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Random;
 
-public class RegistrationPage implements ActionListener {
+public class RegistrationPage {
 
     JFrame frame;
     JPanel regPanel;
@@ -34,7 +35,12 @@ public class RegistrationPage implements ActionListener {
 
         //Back button at top of the page
         backButton = new JButton("Back");
-        backButton.addActionListener(this);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                backButton();
+            }
+        });
         gbc.gridx = 0;
         gbc.gridy = 0;
         regPanel.add(backButton, gbc);
@@ -90,7 +96,18 @@ public class RegistrationPage implements ActionListener {
 
         //Submit button, needs to be triggered when user presses enter button
         submitButton = new JButton("SUBMIT");
-        submitButton.addActionListener(this);
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //When pressed, loginButton captures the information entered in the registration fields and creates a new user object out of that information
+                try {
+                    submitStudent();
+                }
+                catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         gbc.gridx = 1;
         gbc.gridy = 5;
         regPanel.add(submitButton, gbc);
@@ -105,51 +122,70 @@ public class RegistrationPage implements ActionListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //When clicked, the back button reopens the first login page and closes the registration frame
-        if (e.getSource() == backButton) {
-            LoginPage r = new LoginPage();
-            frame.dispose();
+    public void submitStudent() throws IOException {
+
+        //Create new student object for new user
+        Student r = new Student();
+
+        //Set the student's password
+        final String password = passwordText.getText().toString();
+        final String confirmPW = confirmPassText.getText().toString();
+
+        if (password.equals(confirmPW)) {
+
+            r.setStudentPassword(password.toCharArray());
+
+            //Set student name
+            r.setStudentName(nameText.getText());
+            //Set student email
+            r.setStudentEmail(emailText.getText());
+
+            //Generate a new User ID using 6 random integers concatenated to a string then parsed back into an integer
+            //Need to add functionality where the number generated is unique to the user, and no other user can have the same userID
+            String userID = "";
+            Random rand = new Random();
+
+            for (int i = 0; i < 6; i++) {
+                int number = rand.nextInt(10);
+                userID = userID + number;
+            }
+            r.setStudentID(Integer.parseInt(userID));
+
+            //Set student's start date to the date of object generation
+            LocalDate dateObject = LocalDate.now();
+            r.setUserStartDate(dateObject);
+
+
+            //Write new user's email and password to separate files for login validation
+
+            try {
+                String emailFile = "email.txt";
+                FileWriter fw = new FileWriter(emailFile, true);
+                fw.write(r.getStudentEmail() + "\n");
+                fw.close();
+
+                String passwordFile = "password.txt";
+                FileWriter fw2 = new FileWriter(passwordFile, true);
+                fw2.write(r.getStudentPassword() + "\n");
+                fw2.close();
+            }
+            catch(IOException ioe) {
+                System.out.println("IOException: " + ioe.getMessage());
+            }
+
+            JOptionPane.showMessageDialog(frame, "New Student Registered!");
+            System.out.println("user written");
+            backButton();
+
         }
-
-        //When pressed, loginButton captures the information entered in the registration fields and creates a new user object out of that information
-        if (e.getSource() == submitButton) {
-            //Create new student object for new user
-            Student r = new Student();
-
-            //Set the student's password
-            final String password = passwordText.getText().toString();
-            final String confirmPW = confirmPassText.getText().toString();
-
-            if (password.equals(confirmPW)) {
-
-                r.setStudentPassword(password.toCharArray());
-
-                //Set student name
-                r.setStudentName(nameText.getText());
-                //Set student email
-                r.setStudentEmail(emailText.getText());
-
-                //Generate a new User ID using 6 random integers concatenated to a string then parsed back into an integer
-                //Need to add functionality where the number generated is unique to the user, and no other user can have the same userID
-                String userID = "";
-                Random rand = new Random();
-
-                for (int i = 0; i < 6; i++) {
-                    int number = rand.nextInt(10);
-                    userID = userID + number;
-                }
-                r.setStudentID(Integer.parseInt(userID));
-
-                //Set student's start date to the date of object generation
-                LocalDate dateObject = LocalDate.now();
-                r.setUserStartDate(dateObject);
-            }
-            else {
-                JOptionPane.showMessageDialog(frame, "Error, passwords do not match.");
-            }
+        else {
+            JOptionPane.showMessageDialog(frame, "Error, passwords do not match.");
         }
     }
 
-}
+    public void backButton() {
+            LoginPage r = new LoginPage();
+            frame.dispose();
+        }
+    }
+

@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
 public class LoginPage implements ActionListener {
 
@@ -93,14 +93,10 @@ public class LoginPage implements ActionListener {
         //Fix when teacher login page is completed
         label5.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
+            public void mouseClicked(MouseEvent e) {}
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) {}
 
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -165,8 +161,15 @@ public class LoginPage implements ActionListener {
 
     }
 
+    public void logInValidate() throws IOException {
+
+        
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+
 
     }
 }
