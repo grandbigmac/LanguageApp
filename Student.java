@@ -15,8 +15,7 @@ public class Student extends User{
     String studentEmail;
     String progress;
     String studentName;
-
-    char[] studentPassword;
+    String studentPassword;
 
     // GETTER METHODS
 
@@ -55,13 +54,7 @@ public class Student extends User{
 
     // STUDENT PASSWORD
     public String getStudentPassword() {
-        String pw = "";
-
-        for (int i = 0; i < studentPassword.length; i++){
-            pw = pw + studentPassword[i];
-        }
-
-        return pw;
+        return studentPassword;
     }
 
 
@@ -104,7 +97,7 @@ public class Student extends User{
     }
 
     // STUDENT PASSWORD
-    void setStudentPassword(char[] i) {
+    void setStudentPassword(String i) {
         studentPassword = i;
     }
 
