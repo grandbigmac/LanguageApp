@@ -194,7 +194,7 @@ public class RegistrationPage {
     public String hashPassword(String r) {
         
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(r.getBytes());
             byte byteData[] = md.digest();
             
@@ -208,7 +208,7 @@ public class RegistrationPage {
             
         }
         catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger("MD5").log(Level.SEVERE, null, ex);
+            Logger.getLogger("SHA-512").log(Level.SEVERE, null, ex);
             return null;
         }
     }
