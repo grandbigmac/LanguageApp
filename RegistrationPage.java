@@ -19,7 +19,6 @@ public class RegistrationPage {
     JPasswordField passwordText;
     JPasswordField confirmPassText;
     JButton backButton, submitButton;
-
     GridBagConstraints gbc = new GridBagConstraints();
 
     public RegistrationPage() {
