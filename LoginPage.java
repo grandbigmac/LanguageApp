@@ -1,3 +1,5 @@
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -7,6 +9,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LoginPage implements ActionListener {
@@ -81,7 +86,21 @@ public class LoginPage implements ActionListener {
 
         //Submission Button, needs to listen for enter button to submit
         loginButton = new JButton("Submit");
-        loginButton.addActionListener(this);
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                try {
+                    checkEmailPassword(emailText, passwordText);
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (NoSuchAlgorithmException ex) {
+                    ex.printStackTrace();
+                } catch (InvalidKeySpecException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         gbc.gridx = 1;
         gbc.gridy = 6;
         gbc.gridwidth = 1;
@@ -161,9 +180,63 @@ public class LoginPage implements ActionListener {
 
     }
 
-    public void logInValidate() throws IOException {
+    public boolean logInValidate(String password, String storedAuthentication) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        
+        char[] passwordAsCharArray = password.toCharArray();
+        String[] params = storedAuthentication.split(":");
+
+        int iterations = Integer.parseInt(params[0]);
+        byte[] salt = securePassword.fromHex(params[1]);
+        byte[] hash = securePassword.fromHex(params[2]);
+
+        PBEKeySpec spec = new PBEKeySpec(passwordAsCharArray, salt, iterations, hash.length);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+
+        byte[] testHash = skf.generateSecret(spec).getEncoded();
+
+        return securePassword.slowEquals(hash, testHash);
+    }
+
+    public void checkEmailPassword(JTextField email, JPasswordField password) throws FileNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
+
+        String em = email.getText();
+        String pw = password.getText();
+
+        ArrayList<String> emailAL = new ArrayList<>();
+        ArrayList<String> passwordAL = new ArrayList<>();
+
+        //CODE TO FILL ARRAYLIST WITH DATA FROM EMAIL AND PASSWORD FILES
+        Scanner scanner = new Scanner(new File(("email.txt")));
+
+        while (scanner.hasNext()) {
+            emailAL.add(scanner.nextLine());
+        }
+
+        scanner = new Scanner(new File("password.txt"));
+        while (scanner.hasNext()) {
+            passwordAL.add(scanner.nextLine());
+        }
+
+        for (int i = 0; i < emailAL.size(); i++) {
+
+            if (em.equals(emailAL.get(i))) {
+
+                System.out.println("Email matches");
+                if (logInValidate(pw, passwordAL.get(i))) {
+
+                    JOptionPane.showMessageDialog(frame, "Login success!");
+                    //frame.dispose();
+                }
+                else {
+                    System.out.println(passwordAL.get(i));
+
+                    JOptionPane.showMessageDialog(frame, "Incorrect Password");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(frame, "Login credentials incorrect, please try again.");
+            }
+        }
 
     }
 

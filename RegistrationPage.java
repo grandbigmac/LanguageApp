@@ -1,3 +1,5 @@
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,10 +7,13 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 public class RegistrationPage {
 
@@ -108,6 +113,8 @@ public class RegistrationPage {
                 }
                 catch (IOException ex) {
                     ex.printStackTrace();
+                } catch (InvalidKeySpecException | NoSuchAlgorithmException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -125,7 +132,7 @@ public class RegistrationPage {
 
     }
 
-    public void submitStudent() throws IOException {
+    public void submitStudent() throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 
         //Create new student object for new user
         Student r = new Student();
@@ -136,7 +143,7 @@ public class RegistrationPage {
 
         if (password.equals(confirmPW)) {
 
-            r.setStudentPassword(hashPassword(password));
+            r.setStudentPassword(securePassword.generateStrongHash(password));
             System.out.println(r.studentPassword);
 
             //Set student name
@@ -190,28 +197,8 @@ public class RegistrationPage {
             LoginPage r = new LoginPage();
             frame.dispose();
         }
-    
-    public String hashPassword(String r) {
-        
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(r.getBytes());
-            byte byteData[] = md.digest();
-            
-            StringBuilder sb = new StringBuilder();
-            
-            for (int i = 0; i < byteData.length; i++) {
-                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            
-            return sb.toString();
-            
-        }
-        catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger("SHA-512").log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-    
+
+
+
     }
 
