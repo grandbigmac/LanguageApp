@@ -3,8 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegistrationPage {
 
@@ -133,7 +137,8 @@ public class RegistrationPage {
 
         if (password.equals(confirmPW)) {
 
-            r.setStudentPassword(password.toCharArray());
+            r.setStudentPassword(hashPassword(password));
+            System.out.println(r.studentPassword);
 
             //Set student name
             r.setStudentName(nameText.getText());
@@ -154,7 +159,6 @@ public class RegistrationPage {
             //Set student's start date to the date of object generation
             LocalDate dateObject = LocalDate.now();
             r.setUserStartDate(dateObject);
-
 
             //Write new user's email and password to separate files for login validation
 
@@ -187,5 +191,28 @@ public class RegistrationPage {
             LoginPage r = new LoginPage();
             frame.dispose();
         }
+    
+    public String hashPassword(String r) {
+        
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(r.getBytes());
+            byte byteData[] = md.digest();
+            
+            StringBuilder sb = new StringBuilder();
+            
+            for (int i = 0; i < byteData.length; i++) {
+                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            
+            return sb.toString();
+            
+        }
+        catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger("MD5").log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     }
 
