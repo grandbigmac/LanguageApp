@@ -189,10 +189,12 @@ public class LoginPage implements ActionListener {
         byte[] salt = securePassword.fromHex(params[1]);
         byte[] hash = securePassword.fromHex(params[2]);
 
-        PBEKeySpec spec = new PBEKeySpec(passwordAsCharArray, salt, iterations, hash.length);
+        PBEKeySpec spec = new PBEKeySpec(passwordAsCharArray, salt, iterations, 64 * 8);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-
         byte[] testHash = skf.generateSecret(spec).getEncoded();
+
+        System.out.println(hash);
+        System.out.println(testHash);
 
         return securePassword.slowEquals(hash, testHash);
     }
@@ -221,20 +223,22 @@ public class LoginPage implements ActionListener {
 
             if (em.equals(emailAL.get(i))) {
 
+                Boolean login = logInValidate(pw, passwordAL.get(i));
                 System.out.println("Email matches");
-                if (logInValidate(pw, passwordAL.get(i))) {
+                if (login == false) {
 
-                    JOptionPane.showMessageDialog(frame, "Login success!");
-                    //frame.dispose();
+                    JOptionPane.showMessageDialog(frame, "Login credentials incorrect");
+                    break;
                 }
                 else {
-                    System.out.println(passwordAL.get(i));
 
-                    JOptionPane.showMessageDialog(frame, "Incorrect Password");
+                    JOptionPane.showMessageDialog(frame, "Login success!");
+                    frame.dispose();
+                    break;
                 }
             }
-            else {
-                JOptionPane.showMessageDialog(frame, "Login credentials incorrect, please try again.");
+            if (i == emailAL.size() - 1 && emailAL.get(i) != em) {
+                JOptionPane.showMessageDialog(frame, "Login credentials incorrect");
             }
         }
 
