@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Random;
 
 
-public class TeacherRegistrationPage {
+public class StudentRegistrationPage {
 
     JFrame frame;
     JPanel regPanel;
@@ -20,7 +20,7 @@ public class TeacherRegistrationPage {
     JButton backButton, submitButton;
     GridBagConstraints gbc = new GridBagConstraints();
 
-    public TeacherRegistrationPage() {
+    public StudentRegistrationPage() {
 
         frame = new JFrame();
 
@@ -49,7 +49,7 @@ public class TeacherRegistrationPage {
 
 
         //Title text for the page
-        label1 = new JLabel("REGISTER AS A TEACHER");
+        label1 = new JLabel("REGISTER AS A STUDENT");
         gbc.gridx = 1;
         gbc.gridy = 0;
         regPanel.add(label1, gbc);
@@ -103,7 +103,7 @@ public class TeacherRegistrationPage {
             public void actionPerformed(ActionEvent e) {
                 //When pressed, loginButton captures the information entered in the registration fields and creates a new user object out of that information
                 try {
-                    submitTeacher();
+                    submitStudent();
                 }
                 catch (IOException ex) {
                     ex.printStackTrace();
@@ -126,24 +126,24 @@ public class TeacherRegistrationPage {
 
     }
 
-    public void submitTeacher() throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public void submitStudent() throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 
-        //Create new teacher object for new user
-        Teacher r = new Teacher();
+        //Create new student object for new user
+        Student r = new Student();
 
-        //Set the teacher's password
+        //Set the student's password
         final String password = passwordText.getText().toString();
         final String confirmPW = confirmPassText.getText().toString();
 
         if (password.equals(confirmPW)) {
 
-            r.setTeacherPassword(securePassword.generateStrongHash(password));
-            System.out.println(r.teacherPassword);
+            r.setStudentPassword(securePassword.generateStrongHash(password));
+            System.out.println(r.studentPassword);
 
-            //Set teacher name
-            r.setTeacherName(nameText.getText());
-            //Set teacher email
-            r.setTeacherEmail(emailText.getText());
+            //Set student name
+            r.setStudentName(nameText.getText());
+            //Set student email
+            r.setStudentEmail(emailText.getText());
 
             //Generate a new User ID using 6 random integers concatenated to a string then parsed back into an integer
             //Need to add functionality where the number generated is unique to the user, and no other user can have the same userID
@@ -154,30 +154,30 @@ public class TeacherRegistrationPage {
                 int number = rand.nextInt(10);
                 userID = userID + number;
             }
-            r.setTeacherID(Integer.parseInt(userID));
+            r.setStudentID(Integer.parseInt(userID));
 
-            //Set teacher's start date to the date of object generation
+            //Set student's start date to the date of object generation
             LocalDate dateObject = LocalDate.now();
             r.setUserStartDate(dateObject);
 
             //Write new user's email and password to separate files for login validation
 
             try {
-                String emailFile = "teacheremail.txt";
+                String emailFile = "studentemail.txt";
                 FileWriter fw = new FileWriter(emailFile, true);
-                fw.write(r.getTeacherEmail() + "\n");
+                fw.write(r.getStudentEmail() + "\n");
                 fw.close();
 
-                String passwordFile = "teacherpassword.txt";
+                String passwordFile = "studentpassword.txt";
                 FileWriter fw2 = new FileWriter(passwordFile, true);
-                fw2.write(r.getTeacherPassword() + "\n");
+                fw2.write(r.getStudentPassword() + "\n");
                 fw2.close();
             }
             catch(IOException ioe) {
                 System.out.println("IOException: " + ioe.getMessage());
             }
 
-            JOptionPane.showMessageDialog(frame, "New Teacher Registered!");
+            JOptionPane.showMessageDialog(frame, "New Student Registered!");
             System.out.println("user written");
             backButton();
 
@@ -188,11 +188,11 @@ public class TeacherRegistrationPage {
     }
 
     public void backButton() {
-        TeacherLoginPage r = new TeacherLoginPage();
-        frame.dispose();
+            StudentLoginPage r = new StudentLoginPage();
+            frame.dispose();
+        }
+
+
+
     }
-
-
-
-}
 

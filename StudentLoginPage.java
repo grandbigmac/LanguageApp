@@ -14,7 +14,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class LoginPage implements ActionListener {
+public class StudentLoginPage implements ActionListener {
 
     JFrame frame;
     JPanel loginPanel;
@@ -25,7 +25,7 @@ public class LoginPage implements ActionListener {
 
     GridBagConstraints gbc = new GridBagConstraints();
 
-    public LoginPage() {
+    public StudentLoginPage() {
 
         frame = new JFrame();
 
@@ -119,7 +119,7 @@ public class LoginPage implements ActionListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                TeacherRegistrationPage i = new TeacherRegistrationPage();
+                TeacherLoginPage i = new TeacherLoginPage();
                 frame.dispose();
             }
 
@@ -152,7 +152,7 @@ public class LoginPage implements ActionListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                RegistrationPage r = new RegistrationPage();
+                StudentRegistrationPage r = new StudentRegistrationPage();
                 frame.dispose();
             }
 
@@ -208,13 +208,13 @@ public class LoginPage implements ActionListener {
         ArrayList<String> passwordAL = new ArrayList<>();
 
         //CODE TO FILL ARRAYLIST WITH DATA FROM EMAIL AND PASSWORD FILES
-        Scanner scanner = new Scanner(new File(("email.txt")));
+        Scanner scanner = new Scanner(new File(("studentemail.txt")));
 
         while (scanner.hasNext()) {
             emailAL.add(scanner.nextLine());
         }
 
-        scanner = new Scanner(new File("password.txt"));
+        scanner = new Scanner(new File("studentpassword.txt"));
         while (scanner.hasNext()) {
             passwordAL.add(scanner.nextLine());
         }
@@ -234,7 +234,7 @@ public class LoginPage implements ActionListener {
 
                     JOptionPane.showMessageDialog(frame, "Login success!");
                     frame.dispose();
-                    LandingPage r = new LandingPage();
+                    StudentLandingPage r = new StudentLandingPage();
                     break;
                 }
             }

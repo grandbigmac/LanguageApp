@@ -10,8 +10,11 @@ public class Teacher extends User{
     Date userStartDate;
 
     int teacherID;
+    String teacherName;
+    String teacherEmail;
     String languages;
     String feedbackStudent;
+    String teacherPassword;
     int teacherQualification;
     float teacherSalary;
 
@@ -57,6 +60,21 @@ public class Teacher extends User{
         return teacherSalary;
     }
 
+    // TEACHER EMAIL
+    public String getTeacherEmail() {
+        return teacherEmail;
+    }
+
+    // TEACHER PASSWORD
+    public String getTeacherPassword() {
+        return teacherPassword;
+    }
+
+    // TEACHER NAME
+    public String getTeacherName() {
+        return teacherName;
+    }
+
     // SETTER METHODS
 
     // USER ID
@@ -99,4 +117,13 @@ public class Teacher extends User{
     void setTeacherSalary(float i) {
         teacherSalary = i;
     }
+
+    // TEACHER EMAIL
+    void setTeacherEmail(String i) {teacherEmail = i;}
+
+    // TEACHER PASSWORD
+    void setTeacherPassword(String i) {teacherPassword = i;}
+
+    // TEACHER NAME
+    void setTeacherName(String i) {teacherName = i;}
 }

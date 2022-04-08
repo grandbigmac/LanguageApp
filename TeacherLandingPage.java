@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class LandingPage {
+public class TeacherLandingPage {
 
     JFrame frame;
     JPanel regPanel;
@@ -15,7 +15,7 @@ public class LandingPage {
     JButton backButton, submitButton;
     GridBagConstraints gbc = new GridBagConstraints();
 
-    public LandingPage() {
+    public TeacherLandingPage() {
 
         frame = new JFrame();
 
@@ -44,7 +44,7 @@ public class LandingPage {
 
 
         //Title text for the page
-        label1 = new JLabel("LANDING PAGE");
+        label1 = new JLabel("TEACHER LANDING PAGE");
         gbc.gridx = 1;
         gbc.gridy = 0;
         regPanel.add(label1, gbc);
@@ -52,14 +52,14 @@ public class LandingPage {
         frame.add(regPanel);
         frame.getRootPane().setDefaultButton(submitButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Landing Page");
+        frame.setTitle("Teacher Landing Page");
         frame.pack();
         frame.setVisible(true);
 
     }
 
     public void backButton() {
-        LoginPage r = new LoginPage();
+        FirstPage r = new FirstPage();
         frame.dispose();
     }
 
