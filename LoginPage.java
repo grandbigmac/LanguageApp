@@ -234,6 +234,7 @@ public class LoginPage implements ActionListener {
 
                     JOptionPane.showMessageDialog(frame, "Login success!");
                     frame.dispose();
+                    LandingPage r = new LandingPage();
                     break;
                 }
             }
