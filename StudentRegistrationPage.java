@@ -30,11 +30,6 @@ public class StudentRegistrationPage {
 
         gbc.insets = new Insets(5, 5, 5, 100);
 
-        label6 = new JLabel();
-        gbc.gridx = 3;
-        gbc.gridy = 0;
-        regPanel.add(label6, gbc);
-
         //Back button at top of the page
         backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {

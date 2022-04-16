@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -8,7 +7,7 @@ public class Student extends User{
     void User(){}
 
     int userID;
-    int userBirthday;
+    Date userBirthday;
     LocalDate userStartDate;
 
     int studentID;
@@ -16,6 +15,7 @@ public class Student extends User{
     String progress;
     String studentName;
     String studentPassword;
+    String[] languagesStudying;
 
     // GETTER METHODS
 
@@ -25,7 +25,7 @@ public class Student extends User{
     }
 
     // USER BIRTHDAY
-    public int getUserBirthday() {
+    public Date getUserBirthday() {
         return userBirthday;
     }
 
@@ -57,6 +57,9 @@ public class Student extends User{
         return studentPassword;
     }
 
+    // LANGUAGES BEING LEARNED
+    public String[] getLanguagesStudying() { return languagesStudying;}
+
 
     // SETTER METHODS
 
@@ -66,7 +69,7 @@ public class Student extends User{
     }
 
     // USER BIRTHDAY
-    void setUserBirthday(int i) {
+    void setUserBirthday(Date i) {
         userBirthday = i;
     }
 
@@ -100,5 +103,8 @@ public class Student extends User{
     void setStudentPassword(String i) {
         studentPassword = i;
     }
+
+    // LANGUAGES BEING LEARNED
+    void setLanguagesStudying(String[] i) { languagesStudying = i;}
 
 }

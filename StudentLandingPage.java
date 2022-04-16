@@ -3,17 +3,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class StudentLandingPage {
 
     JFrame frame;
     JPanel landingPanel;
-    JLabel label1, label2, label3, label4, label5, label6;
-    JTextField emailText;
-    JPasswordField passwordText;
+    JLabel label1, label2, label3;
     JButton language1Button;
     JButton language2Button;
 
@@ -74,6 +75,45 @@ public class StudentLandingPage {
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.NONE;
         landingPanel.add(language2Button, gbc);
+
+        //Hypertext to log out of account
+        label3 = new JLabel("Logout");
+        label3.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                try {
+                    FirstPage r = new FirstPage();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                frame.dispose();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                label3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                label3.setCursor(Cursor.getDefaultCursor());
+            }
+        });
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 3;
+        gbc.fill = GridBagConstraints.CENTER;
+        landingPanel.add(label3, gbc);
 
         frame.add(landingPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

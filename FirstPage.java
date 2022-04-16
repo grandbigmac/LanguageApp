@@ -3,28 +3,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import java.util.Scanner;
 
 public class FirstPage {
 
     JFrame frame;
     JPanel loginPanel;
-    JLabel label1, label2, label3, label4, label5, label6;
-    JTextField emailText;
-    JPasswordField passwordText;
+    JLabel label1, label2;
     JButton studentLoginButton;
     JButton teacherLoginButton;
 
     GridBagConstraints gbc = new GridBagConstraints();
 
-    public FirstPage() {
+    public FirstPage() throws FileNotFoundException {
 
         frame = new JFrame();
 
@@ -81,9 +76,6 @@ public class FirstPage {
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.NONE;
         loginPanel.add(teacherLoginButton, gbc);
-
-
-
 
         frame.add(loginPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
