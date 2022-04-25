@@ -1,3 +1,5 @@
+import jdbacApi.jdbcCrud;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,13 +16,14 @@ public class StudentLandingPage {
 
     JFrame frame;
     JPanel landingPanel;
-    JLabel label1, label2, label3;
-    JButton language1Button;
-    JButton language2Button;
+    JLabel label1, label2, label3, label4;
+    JButton submitButton;
+    JComboBox<String> languageChoices;
+    String studentLanguages;
 
     GridBagConstraints gbc = new GridBagConstraints();
 
-    public StudentLandingPage() {
+    public StudentLandingPage(String studentEmail) {
 
         frame = new JFrame();
 
@@ -43,38 +46,46 @@ public class StudentLandingPage {
             System.out.println("Could not find file " + "loginpageicon.jpg");
         }
 
-        //Title for TeacherLandingPage
+        //Title for StudentLandingPage
         label2 = new JLabel("Select a language \nto learn today!");
         gbc.gridx = 0;
         gbc.gridy = 1;
         landingPanel.add(label2, gbc);
 
-        //Button for navigating to first language
-        language1Button = new JButton("Language 1");
-        language1Button.addActionListener(new ActionListener() {
+        //code to generate a list of languages to be used in the dropdown menu
+        studentLanguages = jdbcCrud.getStudentLanguages(studentEmail);
+        int count = 1;
+
+        for (int i = 0; i < studentLanguages.length(); i++) {
+            if (studentLanguages.charAt(i) == ',') {
+                count++;
+            }
+        }
+        String[] divisions = studentLanguages.split(", ");
+
+        //Dropdown menu to select which language to study, checks student's languages studying to produce a list
+        languageChoices = new JComboBox<>(divisions);
+        gbc.gridy = 2;
+        landingPanel.add(languageChoices, gbc);
+
+        //Button to submit your language choice
+        submitButton = new JButton("Submit");
+        submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                System.out.println(languageChoices.getItemAt(languageChoices.getSelectedIndex()));
+                if (languageChoices.getItemAt(languageChoices.getSelectedIndex()).equals("Spanish")) {
+                    SpanishFirstPage r = new SpanishFirstPage();
+                    frame.dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(frame, "Language currently unsupported");
+                }
             }
         });
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.NONE;
-        landingPanel.add(language1Button, gbc);
+        gbc.gridy = 3;
+        landingPanel.add(submitButton, gbc);
 
-        //Button for navigation to second language
-        language2Button = new JButton("Language 2");
-        language2Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.fill = GridBagConstraints.NONE;
-        landingPanel.add(language2Button, gbc);
 
         //Hypertext to log out of account
         label3 = new JLabel("Logout");
@@ -110,7 +121,7 @@ public class StudentLandingPage {
             }
         });
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 3;
         gbc.fill = GridBagConstraints.CENTER;
         landingPanel.add(label3, gbc);

@@ -11,11 +11,11 @@ public class Student extends User{
     LocalDate userStartDate;
 
     int studentID;
-    String studentEmail;
-    String progress;
-    String studentName;
-    String studentPassword;
-    String[] languagesStudying;
+    String studentEmail = "";
+    String progress = "";
+    String studentName = "";
+    String studentPassword = "";
+    String languagesStudying = "";
 
     // GETTER METHODS
 
@@ -58,7 +58,7 @@ public class Student extends User{
     }
 
     // LANGUAGES BEING LEARNED
-    public String[] getLanguagesStudying() { return languagesStudying;}
+    public String getLanguagesStudying() { return languagesStudying;}
 
 
     // SETTER METHODS
@@ -105,6 +105,6 @@ public class Student extends User{
     }
 
     // LANGUAGES BEING LEARNED
-    void setLanguagesStudying(String[] i) { languagesStudying = i;}
+    void setLanguagesStudying(String i) { languagesStudying = i;}
 
 }

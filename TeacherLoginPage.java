@@ -1,3 +1,5 @@
+import jdbacApi.connectDB;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.imageio.ImageIO;
@@ -11,6 +13,10 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -90,15 +96,7 @@ public class TeacherLoginPage implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                try {
-                    checkEmailPassword(emailText, passwordText);
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (NoSuchAlgorithmException ex) {
-                    ex.printStackTrace();
-                } catch (InvalidKeySpecException ex) {
-                    ex.printStackTrace();
-                }
+                checkLogInDB(emailText, passwordText);
             }
         });
         gbc.gridx = 1;
@@ -199,6 +197,7 @@ public class TeacherLoginPage implements ActionListener {
         return securePassword.slowEquals(hash, testHash);
     }
 
+    //Old method for validating login from text files
     public void checkEmailPassword(JTextField email, JPasswordField password) throws FileNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
 
         String em = email.getText();
@@ -243,6 +242,63 @@ public class TeacherLoginPage implements ActionListener {
             }
         }
 
+    }
+
+
+    public void checkLogInDB(JTextField email, JPasswordField password) {
+
+        String em = email.getText();
+        String pw = password.getText();
+        Connection con = connectDB.getConnection();
+        Statement stmt = null;
+
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("Select teacherPassword from teachers WHERE teacherEmail = '" + em + "'");
+            int n = 0;
+            while (rs.next()) {
+                int numColumns = rs.getMetaData().getColumnCount();
+                n++;
+                for (int i = 1; i <= numColumns; i++) {
+                    Boolean login = logInValidate(pw, rs.getObject(i).toString());
+                    System.out.println("Email matches");
+                    if (login == false) {
+
+                        JOptionPane.showMessageDialog(frame, "Login credentials incorrect");
+                        break;
+                    } else {
+
+                        JOptionPane.showMessageDialog(frame, "Login success!");
+                        frame.dispose();
+                        TeacherLandingPage r = new TeacherLandingPage();
+                        break;
+                    }
+                }
+                System.out.println("");
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+        }
     }
 
     @Override

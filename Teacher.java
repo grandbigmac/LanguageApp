@@ -6,14 +6,14 @@ public class Teacher extends User{
     void User(){}
 
     int userID;
-    int userBirthday;
+    Date userBirthday;
     Date userStartDate;
 
     int teacherID;
     String teacherName;
     String teacherEmail;
     String languages;
-    String feedbackStudent;
+    String students;
     String teacherPassword;
     int teacherQualification;
     float teacherSalary;
@@ -26,7 +26,7 @@ public class Teacher extends User{
     }
 
     // USER BIRTHDAY
-    private int getUserBirthday() {
+    Date getUserBirthday() {
         return userBirthday;
     }
 
@@ -36,22 +36,22 @@ public class Teacher extends User{
     }
 
     // TEACHER ID
-    private int getTeacherID() {
+    int getTeacherID() {
         return teacherID;
     }
 
     // LANGUAGES
-    private String getLanguages() {
+    String getLanguages() {
         return languages;
     }
 
     // FEEDBACK STUDENT
-    private String getFeedbackStudent() {
-        return feedbackStudent;
+    String getStudents() {
+        return students;
     }
 
     // TEACHER QUALIFICATIONS
-    private int getTeacherQualification() {
+    int getTeacherQualification() {
         return teacherQualification;
     }
 
@@ -83,7 +83,7 @@ public class Teacher extends User{
     }
 
     // USER BIRTHDAY
-    void setUserBirthday(int i) {
+    void setUserBirthday(Date i) {
         userBirthday = i;
     }
 
@@ -104,8 +104,8 @@ public class Teacher extends User{
     }
 
     // FEEDBACK STUDENT
-    void setFeedbackStudent(String i) {
-        feedbackStudent = i;
+    void setStudents(String i) {
+        students = i;
     }
 
     // TEACHER QUALIFICATIONS
