@@ -44,17 +44,18 @@ public class TeacherLandingPage {
         }
 
         //Title for TeacherLandingPage
-        label2 = new JLabel("Select a student to monitor");
+        label2 = new JLabel("What would you like to do?");
         gbc.gridx = 0;
         gbc.gridy = 1;
         landingPanel.add(label2, gbc);
 
         //Button for navigating to first language
-        language1Button = new JButton("Student 1");
+        language1Button = new JButton("See Course Content");
         language1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                SpanishFirstPage r = new SpanishFirstPage();
+                frame.dispose();
             }
         });
         gbc.gridx = 0;
@@ -64,11 +65,12 @@ public class TeacherLandingPage {
         landingPanel.add(language1Button, gbc);
 
         //Button for navigation to second language
-        language2Button = new JButton("Student2");
+        language2Button = new JButton("See Student Information");
         language2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                TeacherStudentView r = new TeacherStudentView();
+                frame.dispose();
             }
         });
         gbc.gridx = 1;

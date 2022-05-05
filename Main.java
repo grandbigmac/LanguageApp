@@ -20,7 +20,9 @@ public class Main {
         //RegistrationPage r = new RegistrationPage();
         //LoginPage i = new LoginPage();
         //FirstPage r = new FirstPage();
-        SpanishFirstPage r = new SpanishFirstPage();
+        //SpanishFirstPage r = new SpanishFirstPage();
+        //SpanishB1 r = new SpanishB1();
+        TeacherLandingPage r = new TeacherLandingPage();
 
         //jdbcCrud.insertStudent(295829, "testemail@email.com", "test name", Date.valueOf("1999-02-23"), "progressing", "English", "1000:cc229c53d761ad157dbf93c871f37b27:97132d39e44d5911f64082308cef3d7be43836b13024a05b158241ec86ce4a82ba50d2c28492b4f46e24903816f651980d94c26b5c033f925ec2a0d46dd92e5b" );
 

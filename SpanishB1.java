@@ -3,11 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Hashtable;
 
@@ -23,7 +20,7 @@ public class SpanishB1 {
     String[] shoppingpricesOptions = {"Payment", "Cancel hair appointment", "Purchase of computer"};
     String[] uniOptions = {"Study plans"};
     String[] travelOptions = {"E.ticket"};
-    String[] socialisingOptions = {"Hair cut", "No show date"};
+    String[] socialisingOptions = {"Hair cut"};
     String[] weatherOptions = {"Rain in station"};
     String[] orderfoodOptions = {"Ordering cocktails by barcode"};
     String[] invitationsOptions = {"Offering help for Pink Unicorn Party"};
@@ -118,7 +115,8 @@ public class SpanishB1 {
             public void actionPerformed(ActionEvent e) {
                 String opt1 = (String) options.getSelectedItem();
                 String opt2 = (String) suboptions.getSelectedItem();
-                new B1Submission(opt1, opt2, frame);
+                new B1Submission(opt1, opt2);
+                frame.dispose();
             }
         });
         gbc.gridy = 6;

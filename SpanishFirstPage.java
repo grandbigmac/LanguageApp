@@ -14,6 +14,7 @@ public class SpanishFirstPage {
     JFrame frame;
     JLabel label1, label2, label3;
     JPanel SpanishPanel;
+    JButton backButton;
     JButton A1, A2, B1, B2;
     GridBagConstraints gbc = new GridBagConstraints();
 
@@ -28,12 +29,24 @@ public class SpanishFirstPage {
         gbc.insets = new Insets(5, 5, 5,5);
 
 
+        //Back button at top of the page
+        backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                backButton();
+            }
+        });
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        SpanishPanel.add(backButton, gbc);
+
         //Image/logo at top of the page
         try {
             BufferedImage loginLogo = ImageIO.read(new File("Flag-Spain.jpeg"));
             label1 = new JLabel(new ImageIcon(loginLogo));
             gbc.gridx = 0;
-            gbc.gridy = 0;
+            gbc.gridy = 1;
             gbc.gridwidth = 2;
             gbc.fill = GridBagConstraints.NONE;
             SpanishPanel.add(label1, gbc);
@@ -44,7 +57,7 @@ public class SpanishFirstPage {
 
         //Text below flag to ask which language the student wants to study
         label2 = new JLabel("Select a language difficulty");
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         SpanishPanel.add(label2, gbc);
 
         //Buttons to select which difficulty to learn
@@ -56,7 +69,7 @@ public class SpanishFirstPage {
                 frame.dispose();
             }
         });
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.CENTER;
         SpanishPanel.add(A1, gbc);
@@ -81,7 +94,7 @@ public class SpanishFirstPage {
             }
         });
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         SpanishPanel.add(B1, gbc);
 
         B2 = new JButton("B2");
@@ -129,7 +142,7 @@ public class SpanishFirstPage {
             }
         });
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.CENTER;
         SpanishPanel.add(label3, gbc);
@@ -139,5 +152,9 @@ public class SpanishFirstPage {
         frame.setTitle("Spanish");
         frame.pack();
         frame.setVisible(true);
+    }
+    public void backButton() {
+        StudentLoginPage r = new StudentLoginPage();
+        frame.dispose();
     }
 }

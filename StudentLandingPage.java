@@ -16,7 +16,7 @@ public class StudentLandingPage {
 
     JFrame frame;
     JPanel landingPanel;
-    JLabel label1, label2, label3, label4;
+    JLabel label1, label2, label3;
     JButton submitButton;
     JComboBox<String> languageChoices;
     String studentLanguages;
@@ -43,7 +43,7 @@ public class StudentLandingPage {
             gbc.fill = GridBagConstraints.CENTER;
             landingPanel.add(label1, gbc);
         } catch (IOException e) {
-            System.out.println("Could not find file " + "loginpageicon.jpg");
+            //System.out.println("Could not find file " + "loginpageicon.jpg");
         }
 
         //Title for StudentLandingPage
@@ -73,7 +73,7 @@ public class StudentLandingPage {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(languageChoices.getItemAt(languageChoices.getSelectedIndex()));
+                //System.out.println(languageChoices.getItemAt(languageChoices.getSelectedIndex()));
                 if (languageChoices.getItemAt(languageChoices.getSelectedIndex()).equals("Spanish")) {
                     SpanishFirstPage r = new SpanishFirstPage();
                     frame.dispose();

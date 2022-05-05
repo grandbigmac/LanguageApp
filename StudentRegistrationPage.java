@@ -1,5 +1,4 @@
 import jdbacApi.jdbcCrud;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -168,7 +167,7 @@ public class StudentRegistrationPage {
         if (password.equals(confirmPW)) {
 
             r.setStudentPassword(securePassword.generateStrongHash(password));
-            System.out.println(r.studentPassword);
+            //System.out.println(r.studentPassword);
 
             //Set student name
             r.setStudentName(nameText.getText());
@@ -204,11 +203,11 @@ public class StudentRegistrationPage {
                 fw2.close();
             }
             catch(IOException ioe) {
-                System.out.println("IOException: " + ioe.getMessage());
+                //System.out.println("IOException: " + ioe.getMessage());
             }
 
             JOptionPane.showMessageDialog(frame, "New Student Registered!");
-            System.out.println("user written");
+            //System.out.println("user written");
             backButton();
 
         }
@@ -230,7 +229,7 @@ public class StudentRegistrationPage {
         if (password.equals(confirmPW)) {
 
             r.setStudentPassword(securePassword.generateStrongHash(password));
-            System.out.println(r.studentPassword);
+            //System.out.println(r.studentPassword);
 
             //Set student name
             r.setStudentName(nameText.getText());
@@ -262,7 +261,7 @@ public class StudentRegistrationPage {
             jdbcCrud.insertStudent(r.getStudentID(), r.getStudentEmail(), r.getStudentName(), (Date) r.getUserBirthday(), r.getProgress(), r.getLanguagesStudying(), r.getStudentPassword());
 
             JOptionPane.showMessageDialog(frame, "New Student Registered!");
-            System.out.println("user written");
+            //System.out.println("user written");
             backButton();
 
         } else {

@@ -1,6 +1,4 @@
 import jdbacApi.connectDB;
-import jdbacApi.jdbcCrud;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.imageio.ImageIO;
@@ -21,7 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentLoginPage implements ActionListener {
+public class StudentLoginPage {
 
     JFrame frame;
     JPanel loginPanel;
@@ -29,8 +27,6 @@ public class StudentLoginPage implements ActionListener {
     JTextField emailText;
     JPasswordField passwordText;
     JButton loginButton;
-    String studentLanguages;
-    String[] divisions;
 
     GridBagConstraints gbc = new GridBagConstraints();
 
@@ -55,7 +51,7 @@ public class StudentLoginPage implements ActionListener {
             loginPanel.add(label1, gbc);
         }
         catch (IOException e) {
-            System.out.println("Could not find file " + "loginpageicon.jpg");
+            //System.out.println("Could not find file " + "loginpageicon.jpg");
         }
 
         //Title for Student Login Page
@@ -177,8 +173,6 @@ public class StudentLoginPage implements ActionListener {
         frame.setTitle("Login Page");
         frame.pack();
         frame.setVisible(true);
-
-
     }
 
     public boolean logInValidate(String password, String storedAuthentication) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -194,8 +188,8 @@ public class StudentLoginPage implements ActionListener {
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] testHash = skf.generateSecret(spec).getEncoded();
 
-        System.out.println(hash);
-        System.out.println(testHash);
+        //System.out.println(hash);
+        //System.out.println(testHash);
 
         return securePassword.slowEquals(hash, testHash);
     }
@@ -226,7 +220,7 @@ public class StudentLoginPage implements ActionListener {
             if (em.equals(emailAL.get(i))) {
 
                 Boolean login = logInValidate(pw, passwordAL.get(i));
-                System.out.println("Email matches");
+                //System.out.println("Email matches");
                 if (login == false) {
 
                     JOptionPane.showMessageDialog(frame, "Login credentials incorrect");
@@ -263,7 +257,7 @@ public class StudentLoginPage implements ActionListener {
                 n++;
                 for (int i = 1; i <= numColumns; i++) {
                     Boolean login = logInValidate(pw, rs.getObject(i).toString());
-                    System.out.println("Email matches");
+                    //System.out.println("Email matches");
                     if (login == false) {
 
                         JOptionPane.showMessageDialog(frame, "Login credentials incorrect");
@@ -276,7 +270,7 @@ public class StudentLoginPage implements ActionListener {
                         break;
                     }
                 }
-                System.out.println("");
+                //System.out.println("");
             }
             rs.close();
         } catch (SQLException ex) {
@@ -301,12 +295,5 @@ public class StudentLoginPage implements ActionListener {
                 }
             }
         }
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-
     }
 }

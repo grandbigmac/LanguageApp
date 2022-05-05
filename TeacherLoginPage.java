@@ -1,5 +1,4 @@
 import jdbacApi.connectDB;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.imageio.ImageIO;
@@ -52,7 +51,7 @@ public class TeacherLoginPage implements ActionListener {
             loginPanel.add(label1, gbc);
         }
         catch (IOException e) {
-            System.out.println("Could not find file " + "loginpageicon.jpg");
+            //System.out.println("Could not find file " + "loginpageicon.jpg");
         }
 
         //Title for Teacher Login Page
@@ -174,8 +173,6 @@ public class TeacherLoginPage implements ActionListener {
         frame.setTitle("Login Page");
         frame.pack();
         frame.setVisible(true);
-
-
     }
 
     public boolean logInValidate(String password, String storedAuthentication) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -191,8 +188,8 @@ public class TeacherLoginPage implements ActionListener {
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] testHash = skf.generateSecret(spec).getEncoded();
 
-        System.out.println(hash);
-        System.out.println(testHash);
+        ////System.out.println(hash);
+        ////System.out.println(testHash);
 
         return securePassword.slowEquals(hash, testHash);
     }
@@ -223,7 +220,7 @@ public class TeacherLoginPage implements ActionListener {
             if (em.equals(emailAL.get(i))) {
 
                 Boolean login = logInValidate(pw, passwordAL.get(i));
-                System.out.println("Email matches");
+                //System.out.println("Email matches");
                 if (login == false) {
 
                     JOptionPane.showMessageDialog(frame, "Login credentials incorrect");
@@ -261,7 +258,7 @@ public class TeacherLoginPage implements ActionListener {
                 n++;
                 for (int i = 1; i <= numColumns; i++) {
                     Boolean login = logInValidate(pw, rs.getObject(i).toString());
-                    System.out.println("Email matches");
+                    //System.out.println("Email matches");
                     if (login == false) {
 
                         JOptionPane.showMessageDialog(frame, "Login credentials incorrect");
@@ -269,12 +266,12 @@ public class TeacherLoginPage implements ActionListener {
                     } else {
 
                         JOptionPane.showMessageDialog(frame, "Login success!");
-                        frame.dispose();
                         TeacherLandingPage r = new TeacherLandingPage();
+                        frame.dispose();
                         break;
                     }
                 }
-                System.out.println("");
+                //System.out.println("");
             }
             rs.close();
         } catch (SQLException ex) {

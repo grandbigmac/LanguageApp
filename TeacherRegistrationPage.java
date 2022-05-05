@@ -167,7 +167,7 @@ public class TeacherRegistrationPage {
         if (password.equals(confirmPW)) {
 
             r.setTeacherPassword(securePassword.generateStrongHash(password));
-            System.out.println(r.teacherPassword);
+            //System.out.println(r.teacherPassword);
 
             //Set teacher name
             r.setTeacherName(nameText.getText());
@@ -203,11 +203,11 @@ public class TeacherRegistrationPage {
                 fw2.close();
             }
             catch(IOException ioe) {
-                System.out.println("IOException: " + ioe.getMessage());
+                //System.out.println("IOException: " + ioe.getMessage());
             }
 
             JOptionPane.showMessageDialog(frame, "New Teacher Registered!");
-            System.out.println("user written");
+            //System.out.println("user written");
             backButton();
 
         }
@@ -229,7 +229,7 @@ public class TeacherRegistrationPage {
         if (password.equals(confirmPW)) {
 
             r.setTeacherPassword(securePassword.generateStrongHash(password));
-            System.out.println(r.teacherPassword);
+            //System.out.println(r.teacherPassword);
 
             //Set teacher name
             r.setTeacherName(nameText.getText());
@@ -258,14 +258,14 @@ public class TeacherRegistrationPage {
             r.setLanguages("English, Spanish");
 
             r.setStudents(jdbcCrud.getStudentNames());
-            System.out.println(r.getStudents());
+            //System.out.println(r.getStudents());
 
             r.setTeacherQualification(5);
 
             jdbcCrud.insertTeacher(r.getTeacherID(), r.getTeacherEmail(), r.getTeacherName(), (Date) r.getUserBirthday(), r.getLanguages(), r.getStudents(), r.getTeacherPassword(), r.getTeacherQualification());
 
             JOptionPane.showMessageDialog(frame, "New Teacher Registered!");
-            System.out.println("user written");
+            //System.out.println("user written");
             backButton();
 
         } else {
